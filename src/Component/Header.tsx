@@ -1,6 +1,6 @@
 import React from 'react'
 import { useNavigate } from "react-router-dom";
-
+import '../Style/Header.css'
 
 export default function Header() {
   const navigate = useNavigate();
@@ -15,7 +15,7 @@ export default function Header() {
             <li onClick={() => handleClick("/")}>Home</li>
             <li onClick={() => handleClick("/bike")}>Bike Details</li>
             <li onClick={() => handleClick("/showList")}>ShowList</li>
-            <li onClick={() => handleClick("/logout")}>Search</li>
+            <li onClick={() => handleClick("/search")}>Search</li>
           </ul>
         </nav>
       </div>

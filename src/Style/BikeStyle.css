@@ -8,14 +8,14 @@
     
     border-radius: 5px;
   
-    margin-top: 4%;
+   
 }
 
 .BikeData{
     display: flex;
     flex-direction: column;
-    max-width: 500px;
-    min-height: 40vh;
+    max-width: 600px;
+    min-height: 15vh;
     margin: 0 auto;
     padding: 20px;
    border-radius: 5px;
@@ -42,7 +42,7 @@
     input[type="number"],
     input[type="text"],
     input[type="color"],
-    select
+   
    
     textArea
      {
@@ -63,3 +63,9 @@
 
 }
 
+.BikeData select {
+  padding: 15px;
+  box-sizing: border-box;
+  font-size: 16px;
+  border: 2px solid #1a1a1a;
+}

@@ -3,7 +3,7 @@
     bikeModel :string;
     price:number;
     color:string
-    bikeType:number
+    bikeTypeId:number
     milage:number
     bikeManufracture:string
     description:string

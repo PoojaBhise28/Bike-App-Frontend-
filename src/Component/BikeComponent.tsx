@@ -37,25 +37,31 @@ export default function BikeComponent() {
         />
         <br />
         <label>Bike color</label>
-        <input
-          type="color"
-          id="color"
-          name="color"
-          placeholder="Bike color"
-          autoComplete="off"
+      
+        <select
           value={bikeInfoUtility.bikeinfo.color}
-          onChange={bikeInfoUtility.onChangeColor}
-        />
+          onChange={bikeInfoUtility.onSelectFieldChange}
+        >
+          <option value="Red">Red</option>
+          <option value="green">Green</option>
+          <option value="blue">Blue</option>
+          <option value="black">Black</option>
+          required
+        </select>
 
         <label>Bike Type:</label>
         <select
-          value={bikeInfoUtility.bikeinfo.bikeType}
+        name="bikeTypeId"
+        id="bikeTypeId"
+          value={bikeInfoUtility.bikeinfo.bikeTypeId}
           onChange={bikeInfoUtility.onSelectFieldChange}
         >
-          <option value={0}>Mountain</option>
+          <option>--Select--</option>
+      
           <option value={1}>Road</option>
           <option value={2}>Hybrid</option>
           <option value={3}>BMX</option>
+          <option value={4}>Mountain</option>
           required
         </select>
         <br />

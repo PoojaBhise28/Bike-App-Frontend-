@@ -1,21 +1,24 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import BikeModel from "../Model/BikeModel";
-import { CreateBikeInfo, UpdateBikeInfo, getBikeInfoById } from "../Service/BikeService";
-
+import {
+  CreateBikeInfo,
+  UpdateBikeInfo,
+  getBikeInfoById,
+} from "../Service/BikeService";
 
 export default function BikeInfoUtility(id: number) {
   const navigate = useNavigate();
   const initialValue: BikeModel = {
-    bikeModel: "",
-    price: 0,
+    bikeModel: "bikeModel",
+    price: 100,
     color: "",
 
-    milage: 0,
-    bikeManufracture: "",
-    description: "",
+    milage: 110,
+    bikeManufracture: "bikeModel",
+    description: "bikeModel",
     id: id,
-    bikeType:0
+    bikeTypeId: 0,
   };
   const [bikeinfo, setBikeinfo] = useState<BikeModel>(initialValue);
   const [errors, setErrors] = useState<Partial<Record<string, string>>>({});
@@ -44,15 +47,15 @@ export default function BikeInfoUtility(id: number) {
   const handleSaveBikeInfo = async () => {
     try {
       if (bikeinfo.id !== 0) {
-        await UpdateBikeInfo(bikeinfo.id,bikeinfo, );
+        await UpdateBikeInfo(bikeinfo.id, bikeinfo);
 
         console.log("Bike data updated successfully.");
-        navigate("/showlist");
+        // navigate("/showlist");
       } else {
         await CreateBikeInfo(bikeinfo);
 
         console.log("New bike data created successfully.");
-        navigate("/showlist");
+        //navigate("/showlist");
       }
       setBikeinfo(initialValue);
       setErrors({});
@@ -65,11 +68,11 @@ export default function BikeInfoUtility(id: number) {
     navigate("/showlist");
   };
 
-  const onSelectFieldChange = (
-    event: React.ChangeEvent<HTMLSelectElement>
-  ) => {
-    const newValue = event.currentTarget.value;
+  const onSelectFieldChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const name = event.currentTarget.name;
+    alert(JSON.stringify(bikeinfo));
+    const newValue = event.currentTarget.value;
+    alert(name + "   " + newValue);
 
     setBikeinfo((prevState) => ({ ...prevState, [name]: newValue }));
   };
@@ -80,9 +83,7 @@ export default function BikeInfoUtility(id: number) {
     setBikeinfo((prev) => ({ ...prev, [name]: newValue }));
   };
 
-  const onTextAreaChange = (
-    event: React.ChangeEvent<HTMLTextAreaElement>
-  ) => {
+  const onTextAreaChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     const name = event.currentTarget.name;
     const newValue = event.currentTarget.value;
     setBikeinfo((prev) => ({ ...prev, [name]: newValue }));
@@ -106,6 +107,6 @@ export default function BikeInfoUtility(id: number) {
     onInputChange,
     onTextAreaChange,
     handelChangeNumberBike,
-    onChangeColor
+    onChangeColor,
   };
 }

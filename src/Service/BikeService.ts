@@ -109,7 +109,7 @@ export const GetAllBikes = async (): Promise<ResponseModel> => {
     };
   
     try {
-      const response = await axios.get(`${API_URL}/bikes`);
+      const response = await axios.get(`${API_URL}/bike`);
       result.data = response.data;
       result.errorCode = response.status + "";
     } catch (error) {
