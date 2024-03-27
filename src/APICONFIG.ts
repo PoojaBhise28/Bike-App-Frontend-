@@ -18,3 +18,16 @@ export const biketypesoptions = [
   type: "Mountain",
 },
 ];
+
+
+export function findbiketypeName(id: number) {
+  var found = biketypesoptions.find((bike: any) => bike.id === id);
+  return found?.type;
+}
+
+export function handelChangeGenric(e:any,setFunc:any) {
+  var name = e.target.name;
+  var newValue = e.target.value;
+  setFunc((prev:any) => ({ ...prev, [name]: newValue }));
+}
+

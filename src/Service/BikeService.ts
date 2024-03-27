@@ -44,6 +44,26 @@ export const getBikeInfoById = async (id: number): Promise<ResponseModel> => {
   return result;
 };
 
+export const getBikeInfoByString = async (input: string): Promise<ResponseModel> => {
+  let result: ResponseModel = {
+    error: "",
+    data: null,
+    message: "",
+    errorCode: "",
+  };
+
+  try {
+    const response = await axios.get(`${API_URL}/bike/search?search=${input}`);
+    result.data = response.data;
+    result.errorCode = response.status + "";
+  } catch (error) {
+    handleError(error, result);
+  }
+
+  return result;
+};
+
+
 export const UpdateBikeInfo = async (
     bikeId: number,
     updatedInfo: BikeModel

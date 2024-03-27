@@ -10,15 +10,16 @@ import {
 export default function BikeInfoUtility(id: number) {
   const navigate = useNavigate();
   const initialValue: BikeModel = {
-    bikeModel: "bikeModel",
-    price: 100,
+    bikeModel: "",
+    price: 0,
     color: "",
 
-    milage: 110,
-    bikeManufracture: "bikeModel",
-    description: "bikeModel",
+    milage: 0,
+    bikeManufracture: "",
+    description: "",
     id: id,
     bikeTypeId: 0,
+    search: "",
   };
   const [bikeinfo, setBikeinfo] = useState<BikeModel>(initialValue);
   const [errors, setErrors] = useState<Partial<Record<string, string>>>({});
@@ -44,37 +45,112 @@ export default function BikeInfoUtility(id: number) {
     // };
   }, [id]);
 
+  const validateBikeFields = (bikeInfo: BikeModel) => {
+    const { bikeModel, price, color, bikeTypeId, milage, bikeManufracture, description } = bikeInfo;
+    const newErrors: Partial<Record<string, string>> = {};
+  
+    if (!bikeModel.trim()) {
+      newErrors.bikeModel = "Bike model is required";
+    } else if (bikeModel.length > 40) {
+      newErrors.bikeModel = "Bike model must be less than 40 characters";
+    }
+  
+    if (!price || isNaN(price) || price <= 0) {
+      newErrors.price = "Price must be a positive number";
+    }
+  
+    if (!color.trim()) {
+      newErrors.color = "Color is required";
+    }
+  
+    if (!milage || isNaN(milage) || milage <= 0 ) {
+      newErrors.milage = "Mileage must be a positive number and less than 100";
+    }
+  
+    if (!bikeManufracture.trim()) {
+      newErrors.bikeManufracture = "Bike manufacture is required";
+    }
+  
+    // if (!description.trim()) {
+    //   newErrors.description = "Description is required";
+    // }
+  
+    if (bikeTypeId === 0) {
+      newErrors.bikeTypeId = "Please select a bike type";
+    }
+  
+    return newErrors;
+  };
+  
   const handleSaveBikeInfo = async () => {
+  
+    const newErrors = validateBikeFields(bikeinfo);
+    if (Object.keys(newErrors).length > 0) {
+
+      setErrors(newErrors);
+      return;
+    }
+    else{
+     
     try {
       if (bikeinfo.id !== 0) {
         await UpdateBikeInfo(bikeinfo.id, bikeinfo);
-
+        navigate("/showlist");
         console.log("Bike data updated successfully.");
-        // navigate("/showlist");
+       
       } else {
         await CreateBikeInfo(bikeinfo);
-
+        navigate("/showlist");
         console.log("New bike data created successfully.");
-        //navigate("/showlist");
+        console.log(bikeinfo);
+       
       }
       setBikeinfo(initialValue);
       setErrors({});
     } catch (error) {
       console.error("Error saving bike information:", error);
     }
+  }
   };
+
+  
+
+
+  // const handleSaveBikeInfo = async () => {
+    
+  //   try {
+  //     if (bikeinfo.id !== 0) {
+  //       await UpdateBikeInfo(bikeinfo.id, bikeinfo);
+
+  //       console.log("Bike data updated successfully.");
+  //       navigate("/showlist");
+  //     } else {
+  //       await CreateBikeInfo(bikeinfo);
+
+  //       console.log("New bike data created successfully.");
+  //       console.log(bikeinfo);
+  //       // navigate("/showlist");
+  //     }
+  //     setBikeinfo(initialValue);
+  //     setErrors({});
+  //   } catch (error) {
+  //     console.error("Error saving bike information:", error);
+  //   }
+  // };
 
   const handleShowList = () => {
     navigate("/showlist");
+    
   };
 
   const onSelectFieldChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const name = event.currentTarget.name;
-    alert(JSON.stringify(bikeinfo));
+    //alert(JSON.stringify(bikeinfo));
     const newValue = event.currentTarget.value;
-    alert(name + "   " + newValue);
+    // alert(name + "   " + newValue);
 
-    setBikeinfo((prevState) => ({ ...prevState, [name]: newValue }));
+    //setBikeinfo((prevState) => ({ ...prevState, [name]: newValue }));
+    setBikeinfo({ ...bikeinfo, [name]: newValue });
   };
 
   const onInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -108,5 +184,9 @@ export default function BikeInfoUtility(id: number) {
     onTextAreaChange,
     handelChangeNumberBike,
     onChangeColor,
+    setBikeinfo,
+   
+    setErrors
   };
 }
+

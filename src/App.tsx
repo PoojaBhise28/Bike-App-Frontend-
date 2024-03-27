@@ -19,6 +19,7 @@ function App() {
       <Route path="/Bike/:id" element={<BikeComponent/>}/>
     <Route path="/showlist" element ={<ShowList/>}></Route>
       <Route path="/Search" element={<SearchComponent/>}/>
+    
       </Route>
      </Routes>
      </BrowserRouter>

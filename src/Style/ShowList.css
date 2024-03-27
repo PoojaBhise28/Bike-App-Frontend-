@@ -1,9 +1,13 @@
 
 table {
-  width: 100%;
+  
+
+  
+   width: 100%; 
   border-collapse: collapse;
   margin-top: 20px;
-  border: 1px solid #ddd; 
+  border: 2px solid #737070; 
+  margin-bottom: 20px;
 }
 
 
@@ -12,13 +16,13 @@ th {
   font-weight: bold;
   text-align: left;
   padding: 8px;
-  border: 1px solid #ddd; 
+  border: 2px solid #464141; 
 }
 
 /* Table row styling */
 td {
   padding: 8px;
-  border: 1px solid #ddd;
+  border: 1px solid #948e8e;
 }
 
 tr:nth-child(even) {
@@ -27,13 +31,14 @@ tr:nth-child(even) {
 
 
 tr:hover {
-  background-color: #ddd;
+  background-color: #71f046;
 }
 
 button {
   padding: 6px 10px;
   cursor: pointer;
   border: none;
+  margin-right: 80px;
   border-radius: 4px;
   background-color: #007bff;
   color: #fff;

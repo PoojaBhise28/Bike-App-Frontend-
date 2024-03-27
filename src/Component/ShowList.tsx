@@ -3,38 +3,38 @@ import BikeModel from "../Model/BikeModel";
 import { getBikeInfoById } from "../Service/BikeService";
 import "../Style/ShowList.css";
 import ShowListUtility from "../Utility/ShowListUtility";
-import { biketypesoptions } from "../APICONFIG";
+import { biketypesoptions, findbiketypeName } from "../APICONFIG";
 
 export default function ShowList() {
-  const [bikeInfo, setbikeInfo] = useState<BikeModel[]>([]);
-  const showListUtility = ShowListUtility();
+ // const [bikeInfo, setbikeInfo] = useState<BikeModel[]>([]);
+  const {bikeInfo,handleUpdateBike,handleDeleteBike}= ShowListUtility();
+  //const showListUtility = ShowListUtility();
 
-  useEffect(() => {
-    fetchBikeList();
-  }, []);
+  // useEffect(() => {
+  //   fetchBikeList();
+  // }, []);
 
-  const fetchBikeList = async () => {
-    try {
-      const response = await getBikeInfoById(1);
-      setbikeInfo([response.data]);
-    } catch (error) {
-      console.error("Error fetching bike list:", error);
-    }
-  };
-  console.log("object", bikeInfo);
+  // const fetchBikeList = async () => {
+  //   try {
+  //     const response = await getBikeInfoById(1);
+  //     setbikeInfo([response.data]);
+  //   } catch (error) {
+  //     console.error("Error fetching bike list:", error);
+  //   }
+  // };
+  // console.log("object", bikeInfo);
  
 
-  function findbiketypeName(id: number) {
-    var found = biketypesoptions.find((bike: any) => bike.id === id);
-    return found?.type;
-  }
+
+  
   return (
     <div>
-      <h1>Bike List</h1>
+      <h1>Bike Information </h1>
       <table>
         <thead>
           <tr>
             {" "}
+            <th>Sr.no</th>
             <th>Bike Model</th>
             <th>Bike Manufacture</th>
             <th>Mileage</th>
@@ -48,23 +48,25 @@ export default function ShowList() {
         </thead>
         <tbody>
           {/* {bikeList.length === 0 ? <div>No record found</div> : () } */}
-          {bikeInfo?.map((bike: any) => (
+          {bikeInfo?.map((bike: any,index:number) => (
             <tr key={bike.id}>
+              <th>{index+1}</th>
               <td>{bike.bikeModel}</td>
               <td>{bike.bikeManufracture}</td>
               <td>{bike.milage}</td>
               <td>{bike.color}</td>
-              <td>{findbiketypeName(bike.bikeTypeId)}</td>
+              {/* <td>{bike.bikeTypeId}</td> */}
+           <td>{findbiketypeName(bike.bikeTypeId)}</td>
               <td>{bike.price}</td>
               <td>{bike.description}</td>
               <td>
                 <button
-                  onClick={() => showListUtility.handleUpdateBike(bike.id)}
+                  onClick={() => handleUpdateBike(bike.id)}
                 >
                   Edit
                 </button>
                 <button
-                  onClick={() => showListUtility.handleDeleteBike(bike.id)}
+                  onClick={() => handleDeleteBike(bike.id)}
                 >
                   Delete
                 </button>

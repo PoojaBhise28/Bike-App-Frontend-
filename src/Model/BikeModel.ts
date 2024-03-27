@@ -8,5 +8,6 @@
     bikeManufracture:string
     description:string
     id:number
+    search?:string
 
  }

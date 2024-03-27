@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 
 import { Navigate, useNavigate } from "react-router-dom";
-import { DeleteBikeInfoById, getBikeInfoById } from "../Service/BikeService";
+import { DeleteBikeInfoById, GetAllBikes, getBikeInfoById } from "../Service/BikeService";
 import BikeModel from "../Model/BikeModel";
 
 
@@ -11,23 +11,50 @@ const ShowListUtility = () => {
  const navigate = useNavigate();
   
 
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        console.log("Fetching bike info...");
-        const bikeRes = await getBikeInfoById(15);
-        console.log("bike info:", bikeRes.data);
+  // useEffect(() => {
+  //   async function fetchData() {
+  //     try {
+  //       console.log("Fetching bike info...");
+  //       const bikeRes = await getBikeInfoById(15);
+  //       console.log("bike info:", bikeRes.data);
         
        
-        setbikeInfo(bikeRes.data);
-      }
-       catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    }
+  //       setbikeInfo(bikeRes.data);
+  //     }
+  //      catch (error) {
+  //       console.error("Error fetching data:", error);
+  //     }
+  //   }
     
-    fetchData();
+  //   fetchData();
+  // }, []);
+ 
+ 
+
+  useEffect(() => {
+    fetchBikeList();
   }, []);
+
+  // const fetchBikeListAll = async () => {
+  //   try {
+  //     const response = await GetAllBikes();
+  //     setbikeInfo([response.data]);
+  //   } catch (error) {
+  //     console.error("Error fetching bike list:", error);
+  //   }
+  // };
+  const fetchBikeList = async () => {
+    try {
+     // const response = await getBikeInfoById(15);
+       const response = await GetAllBikes();
+     
+      setbikeInfo(response.data);
+    } catch (error) {
+      console.error("Error fetching bike list:", error);
+    }
+  };
+  console.log("object", bikeInfo);
+ 
   
   const handleUpdateBike= (id: number) => {
     navigate("/bike/" + id);
