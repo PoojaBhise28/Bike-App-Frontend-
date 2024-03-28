@@ -27,16 +27,15 @@ const SearchUtility = () => {
 
 
 
-useEffect(() => {
-  fetchBikeList();
-}, []);
+
+
 
 
 const fetchBikeList = async () => {
   try {
-   // const response = await getBikeInfoById(15);
+  
      const response = await getBikeInfoByString(search);
-    alert(JSON.stringify(response.data))
+    //alert(JSON.stringify(response.data))
      setBikeInfo(response.data);
   } catch (error) {
     console.error("Error fetching bike list:", error);
@@ -53,14 +52,18 @@ const handleSearchInputChange = (event: React.ChangeEvent<HTMLInputElement>) => 
 };
 
 
+// const handleSearch = async () => {
+
+//  // window.alert('Data fetched successfully!');
+//   alert("handle search")
+//    var res = await axios.get(`http://localhost:5255/api/bike/search?search=${search}`)
+//    .then((res) => setBikeInfo(res.data));
+
+//    alert("data set? ? ? ")
+// };
+
 const handleSearch = async () => {
-
- // window.alert('Data fetched successfully!');
-  alert("handle search")
-   var res = await axios.get(`http://localhost:5255/api/bike/search?search=${search}`)
-   .then((res) => setBikeInfo(res.data));
-
-   alert("data set? ? ? ")
+  fetchBikeList();
 };
  
   return {

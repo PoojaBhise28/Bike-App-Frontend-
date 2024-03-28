@@ -6,6 +6,7 @@ import {
   UpdateBikeInfo,
   getBikeInfoById,
 } from "../Service/BikeService";
+import CustomAlert from "../Component/CustomAlert";
 
 export default function BikeInfoUtility(id: number) {
   const navigate = useNavigate();
@@ -13,7 +14,6 @@ export default function BikeInfoUtility(id: number) {
     bikeModel: "",
     price: 0,
     color: "",
-
     milage: 0,
     bikeManufracture: "",
     description: "",
@@ -23,6 +23,8 @@ export default function BikeInfoUtility(id: number) {
   };
   const [bikeinfo, setBikeinfo] = useState<BikeModel>(initialValue);
   const [errors, setErrors] = useState<Partial<Record<string, string>>>({});
+  const [showAlert, setShowAlert] = useState(false);
+  var message:string="";
 
   useEffect(() => {
     const fetchData = async () => {
@@ -51,24 +53,37 @@ export default function BikeInfoUtility(id: number) {
   
     if (!bikeModel.trim()) {
       newErrors.bikeModel = "Bike model is required";
+      message ="Bike model is required";
+      setShowAlert(true);
+
     } else if (bikeModel.length > 40) {
       newErrors.bikeModel = "Bike model must be less than 40 characters";
+      message="Bike model must be less than 40 characters";
+      setShowAlert(true);
     }
   
     if (!price || isNaN(price) || price <= 0) {
       newErrors.price = "Price must be a positive number";
+      message="Price must be a positive number";
+      setShowAlert(true);
     }
   
     if (!color.trim()) {
       newErrors.color = "Color is required";
+      message="Color is required";
+      setShowAlert(true);
     }
   
     if (!milage || isNaN(milage) || milage <= 0 ) {
       newErrors.milage = "Mileage must be a positive number and less than 100";
+      message= "Mileage must be a positive number and less than 100";
+      setShowAlert(true);
     }
   
     if (!bikeManufracture.trim()) {
       newErrors.bikeManufracture = "Bike manufacture is required";
+      message= "Bike manufacture is required";
+      setShowAlert(true);
     }
   
     // if (!description.trim()) {
@@ -77,6 +92,8 @@ export default function BikeInfoUtility(id: number) {
   
     if (bikeTypeId === 0) {
       newErrors.bikeTypeId = "Please select a bike type";
+      message= "Please select a bike type";
+      setShowAlert(true);
     }
   
     return newErrors;
@@ -185,8 +202,11 @@ export default function BikeInfoUtility(id: number) {
     handelChangeNumberBike,
     onChangeColor,
     setBikeinfo,
-   
-    setErrors
+    message,
+    setErrors,
+    showAlert,
+    setShowAlert
+
   };
 }
 

@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import "../Style/BikeStyle.css";
 import BikeInfoUtility from "../Utility/BikeInfoUtility";
 import { handelChangeGenric } from "../APICONFIG";
+import CustomAlert from "./CustomAlert";
+
 
 export default function BikeComponent() {
   const { id = 0 } = useParams();
@@ -22,11 +24,18 @@ export default function BikeComponent() {
           autoComplete="off"
           value={bikeInfoUtility.bikeinfo.bikeModel}
           onChange={bikeInfoUtility.onInputChange}
-          
-           
-            required
+          required
         />
-    {bikeInfoUtility.errors.bikeModel && <p className="error-message">{bikeInfoUtility.errors.bikeModel}</p>}
+        {bikeInfoUtility.showAlert && (
+          <CustomAlert message={bikeInfoUtility.message} />
+        )}
+       {/* { <TestCompnent />}
+        <SearchComponent/>
+        {<CustomAlert message= {bikeInfoUtility.message}/>}
+        <TestAnzar></TestAnzar>
+        <CustomAlert message= "dsadsa" /> */}
+  
+        {/* {bikeInfoUtility.errors.bikeModel && <p className="error-message">{bikeInfoUtility.errors.bikeModel}</p>} */}
         <br />
         <label>Bike Manufacture</label>
         <input
@@ -40,7 +49,7 @@ export default function BikeComponent() {
           // onChange={bikeInfoUtility.onInputChange}
           onChange={(e) => handelChangeGenric(e, bikeInfoUtility.setBikeinfo)}
         />
-         {bikeInfoUtility.errors.bikeManufracture && <p className="error-message">{bikeInfoUtility.errors.bikeManufracture}</p>}
+        {/* {bikeInfoUtility.errors.bikeManufracture && (<p className="error-message">{bikeInfoUtility.errors.bikeManufracture} </p>)} */}
         <br />
         <div className="Color-BikeType">
           <div className="color">
@@ -52,14 +61,13 @@ export default function BikeComponent() {
               name="color"
               id="color"
             >
-                 <option>--Select--</option>
+              <option>--Select--</option>
               <option value="Red">Red</option>
               <option value="green">Green</option>
               <option value="blue">Blue</option>
               <option value="black">Black</option>
-             
             </select>
-            {bikeInfoUtility.errors.color && <p className="error-message">{bikeInfoUtility.errors.color}</p>}
+            {/* {bikeInfoUtility.errors.color && (<p className="error-message">{bikeInfoUtility.errors.color}</p>)} */}
           </div>
 
           <div className="type">
@@ -77,9 +85,8 @@ export default function BikeComponent() {
               <option value={3}>BMX</option>
               <option value={4}>Mountain</option>
               required
-            
             </select>
-              {bikeInfoUtility.errors.bikeTypeId && <p className="error-message">{bikeInfoUtility.errors.bikeTypeId}</p>}
+          
           </div>
         </div>
         <br />
@@ -97,7 +104,9 @@ export default function BikeComponent() {
               onChange={bikeInfoUtility.handelChangeNumberBike}
               style={{ marginRight: "30px" }}
             />
-              {bikeInfoUtility.errors.milage && <p className="error-message">{bikeInfoUtility.errors.milage}</p>}
+
+            {/* {bikeInfoUtility.errors.milage && <p className="error-message">{bikeInfoUtility.errors.milage}</p>}
+             */}
           </div>
 
           <div className="price">
@@ -112,9 +121,9 @@ export default function BikeComponent() {
               required
               value={bikeInfoUtility.bikeinfo.price}
               onChange={bikeInfoUtility.handelChangeNumberBike}
-
             />
-                {bikeInfoUtility.errors.price && <p className="error-message">{bikeInfoUtility.errors.price}</p>}
+             {/* {bikeInfoUtility.errors.price && ( <p className="error-message">{bikeInfoUtility.errors.price}</p>)} */}
+
           </div>
         </div>
 
@@ -130,7 +139,7 @@ export default function BikeComponent() {
           value={bikeInfoUtility.bikeinfo.description}
           onChange={bikeInfoUtility.onTextAreaChange}
         ></textarea>
-          {bikeInfoUtility.errors.description && <p className="error-message">{bikeInfoUtility.errors.description}</p>}
+        
         <div className="button">
           <button onClick={bikeInfoUtility.handleSaveBikeInfo}>
             {+id > 0 ? "Update" : "Save"}
@@ -140,6 +149,18 @@ export default function BikeComponent() {
             ShowList
           </button>
         </div>
+
+        <div>
+           {bikeInfoUtility.errors.bikeModel && <p className="error-message">{bikeInfoUtility.errors.bikeModel}</p>}
+           {bikeInfoUtility.errors.bikeManufracture && (<p className="error-message">{bikeInfoUtility.errors.bikeManufracture} </p>)}
+           {bikeInfoUtility.errors.bikeTypeId && ( <p className="error-message">{bikeInfoUtility.errors.bikeTypeId} </p>)}
+           {bikeInfoUtility.errors.color && (<p className="error-message">{bikeInfoUtility.errors.color}</p>)}
+           {bikeInfoUtility.errors.price && ( <p className="error-message">{bikeInfoUtility.errors.price}</p>)}
+           {bikeInfoUtility.errors.milage && <p className="error-message">{bikeInfoUtility.errors.milage}</p>}
+           {bikeInfoUtility.errors.description && (<p className="error-message">{bikeInfoUtility.errors.description}</p>)}
+        </div>
+
+
       </div>
     </div>
   );
