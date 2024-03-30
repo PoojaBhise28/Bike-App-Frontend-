@@ -14,18 +14,23 @@ export default function BikeComponent() {
     <div className="bike-Container">
       <div className="BikeData">
         <h1>Bike Information </h1>
-        <label>Bike Model</label>
-        <input
-          type="text"
-          id="bikeModel"
-          name="bikeModel"
-          placeholder="Bike Model"
-          maxLength={50}
-          autoComplete="off"
-          value={bikeInfoUtility.bikeinfo.bikeModel}
-          onChange={bikeInfoUtility.onInputChange}
-          required
-        />
+        <div className="BikeModel">
+          <label>Bike Model</label>
+          <select
+            name="bikeModelId"
+            id="bikeModelId"
+            value={bikeInfoUtility.bikeinfo.bikeModelId}
+            onChange={bikeInfoUtility.onSelectFieldChange}
+          >
+            <option>--Select Model</option>
+            <option value={1}>Honda</option>
+            <option value={2}>Maruti</option>
+            <option value={3}>Austro</option>
+            <option value={4}>Activa</option>
+            <option value={5}>Bajaj</option>
+            <option value={6}>Ninja</option>
+          </select>
+        </div>
         {bikeInfoUtility.showAlert && (
           <CustomAlert message={bikeInfoUtility.message} />
         )}
@@ -37,18 +42,21 @@ export default function BikeComponent() {
   
         {/* {bikeInfoUtility.errors.bikeModel && <p className="error-message">{bikeInfoUtility.errors.bikeModel}</p>} */}
         <br />
-        <label>Bike Manufacture</label>
-        <input
-          type="text"
-          id="bikeManufracture"
-          name="bikeManufracture"
-          placeholder="Bike Manufacture"
-          maxLength={50}
-          autoComplete="off"
-          value={bikeInfoUtility.bikeinfo.bikeManufracture}
-          // onChange={bikeInfoUtility.onInputChange}
-          onChange={(e) => handelChangeGenric(e, bikeInfoUtility.setBikeinfo)}
-        />
+        <div className="BikeManufracture">
+          <label>Bike Model</label>
+          <select
+            name="bikeManufractureId"
+            id="bikeManufractureId"
+            value={bikeInfoUtility.bikeinfo.bikeManufractureId}
+            onChange={bikeInfoUtility.onSelectFieldChange}
+          >
+            <option>--Select Bike Manufracturer</option>
+            <option value={1}>Tata</option>
+            <option value={2}>Honda</option>
+            <option value={3}>Hero Honda</option>
+            <option value={4}>Bajaj</option>
+          </select>
+        </div>
         {/* {bikeInfoUtility.errors.bikeManufracture && (<p className="error-message">{bikeInfoUtility.errors.bikeManufracture} </p>)} */}
         <br />
         <div className="Color-BikeType">
@@ -56,7 +64,7 @@ export default function BikeComponent() {
             <label>Bike color</label>
 
             <select
-              value={bikeInfoUtility.bikeinfo.color}
+              value={bikeInfoUtility.bikeinfo.colorId}
               onChange={bikeInfoUtility.onSelectFieldChange}
               name="color"
               id="color"

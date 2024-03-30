@@ -10,8 +10,7 @@ import { useParams } from "react-router-dom";
 export default function SearchComponent() {
   
 
-  const {  handleSearchInputChange,handleSearch,bikeInfo,setBikeInfo} =
-    SearchUtility();
+  const {  handleSearchInputChange,handleSearch,bikeInfo,setBikeInfo} =SearchUtility();
 
   console.log("object", bikeInfo);
   return (
@@ -52,13 +51,13 @@ export default function SearchComponent() {
         </thead>
         <tbody>
           {/* {bikeList.length === 0 ? <div>No record found</div> : () } */}
-          {bikeInfo?.map((bike: BikeModel, index: number) => (
+          {bikeInfo?.map((bike: any, index: number) => (
             <tr key={bike.id}>
               <th>{index + 1}</th>
-              <td>{bike.bikeModel}</td>
-              <td>{bike.bikeManufracture}</td>
+              <td>{bike.modelName}</td>
+              <td>{bike.bikeManufractureName}</td>
               <td>{bike.milage}</td>
-              <td>{bike.color}</td>
+              <td>{bike.colourName}</td>
               {/* <td>{bike.bikeTypeId}</td> */}
               <td>{findbiketypeName(bike.bikeTypeId)}</td>
               <td>{bike.price}</td>

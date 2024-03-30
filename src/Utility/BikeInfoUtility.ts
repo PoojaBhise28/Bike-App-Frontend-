@@ -7,21 +7,38 @@ import {
   getBikeInfoById,
 } from "../Service/BikeService";
 import CustomAlert from "../Component/CustomAlert";
+import SearchModel from "../Model/SearchModel";
 
 export default function BikeInfoUtility(id: number) {
   const navigate = useNavigate();
-  const initialValue: BikeModel = {
+  const initialValue: SearchModel = {
+    id: 0,
+    bikeModelId: 0,
+    modelName: "",
+    price: 0,
+    colorId: 0,
+    colourName: "",
+    fuelType: "",
+    milage: 0,
+    bikeManufractureId: 0,
+    bikeManufractureName: "",
+    description: "",
+    bikeTypeId: 0,
+    typeName: ""
+  };
+  const initialValuebike: BikeModel = {
     bikeModel: "",
     price: 0,
     color: "",
+    bikeTypeId: 0,
     milage: 0,
     bikeManufracture: "",
     description: "",
-    id: id,
-    bikeTypeId: 0,
-    search: "",
+    id: 0,
+    fuelType: ""
   };
-  const [bikeinfo, setBikeinfo] = useState<BikeModel>(initialValue);
+  const [bikeInfo, setBikeInfo] = useState<BikeModel>(initialValuebike);
+  const [bikeinfo, setBikeinfo] = useState<SearchModel>(initialValue);
   const [errors, setErrors] = useState<Partial<Record<string, string>>>({});
   const [showAlert, setShowAlert] = useState(false);
   var message:string="";
@@ -101,7 +118,7 @@ export default function BikeInfoUtility(id: number) {
   
   const handleSaveBikeInfo = async () => {
   
-    const newErrors = validateBikeFields(bikeinfo);
+    const newErrors = validateBikeFields(bikeInfo);
     if (Object.keys(newErrors).length > 0) {
 
       setErrors(newErrors);
@@ -111,12 +128,12 @@ export default function BikeInfoUtility(id: number) {
      
     try {
       if (bikeinfo.id !== 0) {
-        await UpdateBikeInfo(bikeinfo.id, bikeinfo);
+        await UpdateBikeInfo(bikeinfo.id, bikeInfo);
         navigate("/showlist");
         console.log("Bike data updated successfully.");
        
       } else {
-        await CreateBikeInfo(bikeinfo);
+        await CreateBikeInfo(bikeInfo);
         navigate("/showlist");
         console.log("New bike data created successfully.");
         console.log(bikeinfo);

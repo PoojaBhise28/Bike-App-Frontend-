@@ -7,6 +7,8 @@ import HomeComponent from './Component/HomeComponent';
 import BikeComponent from './Component/BikeComponent';
 import ShowList from './Component/ShowList';
 import SearchComponent from './Component/SearchComponent';
+import BikeModel from './Component/BikeModel';
+import AdvanceSearch from './Component/AdvanceSearch';
 
 function App() {
   return (
@@ -17,8 +19,11 @@ function App() {
       <Route path="/" element={<HomeComponent/>}/>
       <Route path="/Bike" element={<BikeComponent/>}/>
       <Route path="/Bike/:id" element={<BikeComponent/>}/>
+      {/* <Route path="/Bike" element={<BikeModel/>}/>
+      <Route path="/Bike/:id" element={<BikeModel/>}/> */}
     <Route path="/showlist" element ={<ShowList/>}></Route>
       <Route path="/Search" element={<SearchComponent/>}/>
+      <Route path="/advanceSearch" element={<AdvanceSearch/>}/>
     
       </Route>
      </Routes>

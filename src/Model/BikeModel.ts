@@ -1,6 +1,6 @@
  export default interface BikeModel{
 
-    bikeModel :string;
+    bikeModel:string;
     price:number;
     color:string
     bikeTypeId:number
@@ -9,5 +9,6 @@
     description:string
     id:number
     search?:string
+    fuelType:string
 
  }

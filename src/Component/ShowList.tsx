@@ -6,8 +6,8 @@ import ShowListUtility from "../Utility/ShowListUtility";
 import { biketypesoptions, findbiketypeName } from "../APICONFIG";
 
 export default function ShowList() {
- // const [bikeInfo, setbikeInfo] = useState<BikeModel[]>([]);
-  const {bikeInfo,handleUpdateBike,handleDeleteBike}= ShowListUtility();
+  // const [bikeInfo, setbikeInfo] = useState<BikeModel[]>([]);
+  const { bikeInfo, handleUpdateBike, handleDeleteBike } = ShowListUtility();
   //const showListUtility = ShowListUtility();
 
   // useEffect(() => {
@@ -23,10 +23,7 @@ export default function ShowList() {
   //   }
   // };
   // console.log("object", bikeInfo);
- 
 
-
-  
   return (
     <div>
       <h1>Bike Information </h1>
@@ -43,31 +40,24 @@ export default function ShowList() {
             <th>Price</th>
             <th>Description</th>
             <th>Action</th>
-           
           </tr>
         </thead>
         <tbody>
           {/* {bikeList.length === 0 ? <div>No record found</div> : () } */}
-          {bikeInfo?.map((bike: any,index:number) => (
+          {bikeInfo?.map((bike: any, index: number) => (
             <tr key={bike.id}>
-              <th>{index+1}</th>
-              <td>{bike.bikeModel}</td>
-              <td>{bike.bikeManufracture}</td>
+              <th>{index + 1}</th>
+              <td>{bike.modelName}</td>
+              <td>{bike.bikeManufractureName}</td>
               <td>{bike.milage}</td>
-              <td>{bike.color}</td>
+              <td>{bike.colourName}</td>
               {/* <td>{bike.bikeTypeId}</td> */}
-           <td>{findbiketypeName(bike.bikeTypeId)}</td>
+              <td>{bike.typeName}</td>
               <td>{bike.price}</td>
               <td>{bike.description}</td>
               <td>
-                <button
-                  onClick={() => handleUpdateBike(bike.id)}
-                >
-                  Edit
-                </button>
-                <button
-                  onClick={() => handleDeleteBike(bike.id)}
-                >
+                <button onClick={() => handleUpdateBike(bike.id)}>Edit</button>
+                <button onClick={() => handleDeleteBike(bike.id)}>
                   Delete
                 </button>
               </td>

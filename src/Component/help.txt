@@ -1,0 +1,42 @@
+<div>
+        <div>
+          <table>
+            <thead>
+              <tr>
+                <th>Sr.no</th>
+                <th>Bike Model</th>
+                <th>Bike Manufacture</th>
+                <th>Mileage</th>
+                <th>Color</th>
+                <th>Bike Type</th>
+                <th>Price</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              {/* Conditional Rendering */}
+              {advanceSearchUtility.bikeinfo?.length === 0 ? (
+                <tr>
+                  <td>No record found</td>
+                </tr>
+              ) : (
+                advanceSearchUtility.bikeinfo?.map(
+                  (bike: any, index: number) => (
+                    <tr key={bike.id}>
+                      <th>{index + 1}</th>
+                      <td>{bike.modelName}</td>
+                      <td>{bike.bikeManufractureName}</td>
+                      <td>{bike.milage}</td>
+                      <td>{bike.colourName}</td>
+                      {/* <td>{bike.bikeTypeId}</td> */}
+                      <td>{bike.typeName}</td>
+                      <td>{bike.price}</td>
+                      <td>{bike.description}</td>
+                    </tr>
+                  )
+                )
+              )}
+            </tbody>
+          </table>
+        </div>
+      </div>

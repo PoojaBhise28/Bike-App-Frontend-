@@ -3,6 +3,7 @@ import { API_URL } from "../APICONFIG";
 
 import BikeModel from "../Model/BikeModel";
 import ResponseModel from "../Model/ResponseModel";
+import SearchModel from "../Model/SearchModel";
 
 export const CreateBikeInfo = async (
   bikeInfo: BikeModel
@@ -44,7 +45,9 @@ export const getBikeInfoById = async (id: number): Promise<ResponseModel> => {
   return result;
 };
 
-export const getBikeInfoByString = async (input: string): Promise<ResponseModel> => {
+export const getBikeInfoByString = async (
+  input: string
+): Promise<ResponseModel> => {
   let result: ResponseModel = {
     error: "",
     data: null,
@@ -63,31 +66,31 @@ export const getBikeInfoByString = async (input: string): Promise<ResponseModel>
   return result;
 };
 
-
 export const UpdateBikeInfo = async (
-    bikeId: number,
-    updatedInfo: BikeModel
-  ): Promise<ResponseModel> => {
-    let result: ResponseModel = {
-      error: "",
-      data: null,
-      message: "",
-      errorCode: "",
-    };
-  
-    try {
-      const response = await axios.put(`${API_URL}/bike/${bikeId}`, updatedInfo);
-      result.data = response.data;
-      result.errorCode = response.status + "";
-    } catch (error) {
-      handleError(error, result);
-    }
-  
-    return result;
+  bikeId: number,
+  updatedInfo: BikeModel
+): Promise<ResponseModel> => {
+  let result: ResponseModel = {
+    error: "",
+    data: null,
+    message: "",
+    errorCode: "",
   };
-  
 
-export const DeleteBikeInfoById = async (id: number): Promise<ResponseModel> => {
+  try {
+    const response = await axios.put(`${API_URL}/bike/${bikeId}`, updatedInfo);
+    result.data = response.data;
+    result.errorCode = response.status + "";
+  } catch (error) {
+    handleError(error, result);
+  }
+
+  return result;
+};
+
+export const DeleteBikeInfoById = async (
+  id: number
+): Promise<ResponseModel> => {
   let result: ResponseModel = {
     error: "",
     data: null,
@@ -121,40 +124,92 @@ const handleError = (error: any, result: ResponseModel) => {
   }
 };
 export const GetAllBikes = async (): Promise<ResponseModel> => {
-    let result: ResponseModel = {
-      error: "",
-      data: null,
-      message: "",
-      errorCode: "",
-    };
-  
-    try {
-      const response = await axios.get(`${API_URL}/bike`);
-      result.data = response.data;
-      result.errorCode = response.status + "";
-    } catch (error) {
-      handleError(error, result);
-    }
-  
-    return result;
+  let result: ResponseModel = {
+    error: "",
+    data: null,
+    message: "",
+    errorCode: "",
   };
-  
-  export const SearchBikes = async (searchQuery: string): Promise<ResponseModel> => {
-    let result: ResponseModel = {
-      error: "",
-      data: null,
-      message: "",
-      errorCode: "",
-    };
-  
-    try {
-      const response = await axios.get(`${API_URL}/bikes/search?q=${searchQuery}`);
-      result.data = response.data;
-      result.errorCode = response.status + "";
-    } catch (error) {
-      handleError(error, result);
-    }
-  
-    return result;
+
+  try {
+    const response = await axios.get(`${API_URL}/bike`);
+    result.data = response.data;
+    result.errorCode = response.status + "";
+  } catch (error) {
+    handleError(error, result);
+  }
+
+  return result;
+};
+
+export const SearchBikes = async (
+  searchQuery: string
+): Promise<ResponseModel> => {
+  let result: ResponseModel = {
+    error: "",
+    data: null,
+    message: "",
+    errorCode: "",
   };
-  
+
+  try {
+    const response = await axios.get(
+      `${API_URL}/bikes/search?q=${searchQuery}`
+    );
+    result.data = response.data;
+    result.errorCode = response.status + "";
+  } catch (error) {
+    handleError(error, result);
+  }
+
+  return result;
+};
+
+export const AdvanceSearchBikes = async (
+  searchQuery: string
+): Promise<ResponseModel> => {
+  let result: ResponseModel = {
+    error: "",
+    data: null,
+    message: "",
+    errorCode: "",
+  };
+
+  try {
+    const response = await axios.post(
+      `${API_URL}/bike/advanceSearch=${searchQuery}`
+    );
+    result.data = response.data;
+    result.errorCode = response.status + "";
+  } catch (error) {
+    handleError(error, result);
+  }
+
+  return result;
+};
+
+export const searchAdvance = async (
+  bikeInfo: SearchModel
+): Promise<ResponseModel> => {
+  let result: ResponseModel = {
+    error: "",
+    data: null,
+    message: "",
+    errorCode: "",
+  };
+
+  try {
+    alert("advance search");
+    const response = await axios.post(
+      `${API_URL}/bike/advanceSearch`,
+      bikeInfo
+    );
+    result.data = response.data;
+    result.errorCode = response.status + "";
+  } catch (error) {
+    alert("advance search catch ");
+    handleError(error, result);
+  }
+
+  return result;
+};

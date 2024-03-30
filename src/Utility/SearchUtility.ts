@@ -18,18 +18,13 @@ const SearchUtility = () => {
     bikeManufracture: "",
     description: "",
     id: 0,
-    search: ""
+    search: "",
+    fuelType: ""
   };
   const [ search, setSearch ] = useState("");
  
   const [bikeInfo, setBikeInfo] = useState<BikeModel[]>([initialValue]);
-
-
-
-
-
-
-
+  
 
 const fetchBikeList = async () => {
   try {

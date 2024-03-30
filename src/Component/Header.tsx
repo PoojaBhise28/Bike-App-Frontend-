@@ -16,6 +16,8 @@ export default function Header() {
             <li onClick={() => handleClick("/bike")}>Bike Details</li>
             <li onClick={() => handleClick("/showList")}>ShowList</li>
             <li onClick={() => handleClick("/search")}>Search</li>
+            <li onClick={() => handleClick("/advanceSearch")}>advanceSearch</li>
+           
           </ul>
         </nav>
       </div>

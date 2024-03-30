@@ -1,0 +1,47 @@
+/* Style for AdvanceSearch component */
+.bike-Container {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  /* Style for select options */
+  select {
+    width: 200px; /* Adjust width as needed */
+    margin-bottom: 10px;
+  }
+  
+  /* Arrange options in two rows */
+  select[name='bikeModelId'] option:nth-child(-n+3),
+  select[name='bikeManufractureId'] option:nth-child(-n+4),
+  select[name='color'] option:nth-child(-n+3),
+  select[name='fuelType'] option:nth-child(-n+4),
+  select[name='bikeTypeId'] option:nth-child(-n+3) {
+    display: inline-block;
+    width: 47%;
+    height: 5%; 
+    font-size: 15px;
+    border: 1px solid #000000;/* Adjust width as needed */
+  }
+  
+  /* Style for the table */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+  
+  th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+  }
+  
+  th {
+    background-color: #f2f2f2;
+  }
+  
+  /* Optional: Add hover effect to table rows */
+  tbody tr:hover {
+    background-color: #f5f5f5;
+  }
+  
